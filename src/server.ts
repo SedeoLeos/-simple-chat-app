@@ -1,5 +1,5 @@
 import express, { Application } from "express";
-import socketIO, { Server as SocketIOServer } from "socket.io";
+import  { Server as SocketIOServer } from "socket.io";
 import { createServer, Server as HTTPServer } from "http";
 import path from "path";
 
@@ -10,7 +10,7 @@ export class Server {
 
   private activeSockets: string[] = [];
 
-  private readonly DEFAULT_PORT = 5000;
+  private readonly DEFAULT_PORT = 3000;
 
   constructor() {
     this.initialize();
@@ -19,7 +19,7 @@ export class Server {
   private initialize(): void {
     this.app = express();
     this.httpServer = createServer(this.app);
-    this.io = socketIO(this.httpServer);
+    this.io = new SocketIOServer(this.httpServer);
 
     this.configureApp();
     this.configureRoutes();
